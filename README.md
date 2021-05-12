@@ -1,12 +1,3 @@
-TODO:
-
-4. Build the test runner, conforming to the [Test Runner interface specification](https://github.com/exercism/docs/blob/main/building/tooling/test-runners/interface.md).
-   - Update the files to match your track's needs. At the very least, you'll need to update `bin/run.sh`, `Dockerfile` and the test solutions in the `tests` directory
-   - Tip: look for `TODO:` comments to point you towards code that need updating
-   - Tip: look for `OPTIONAL:` comments to point you towards code that _could_ be useful
-
-Once you're happy with your test runner, [open an issue on the exercism/automated-tests repo](https://github.com/exercism/automated-tests/issues/new?assignees=&labels=&template=new-test-runner.md&title=%5BNew+Test+Runner%5D+) to request an official test runner repository for your track.
-
 # Exercism Wren Test Runner
 
 The Docker image to automatically run tests on Wren solutions submitted to [Exercism].
