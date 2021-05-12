@@ -36,7 +36,7 @@ TEST="${input_dir}/${slug}.spec.wren"
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
 ln -sf ../../../vendor ${input_dir}/vendor
-rm $results_file
+rm -f $results_file
 test_output=$(wren_cli $TEST $results_file 2>&1)
 
 status=$?

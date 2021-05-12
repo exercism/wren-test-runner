@@ -32,7 +32,7 @@ for test_dir in tests/*; do
 
     # echo "${test_dir_name}: comparing results.json to expected_results.json"
     diff -urN "${expected_results_file_path}" "${results_file_path}"
-    rm ${results_file_path}
+    rm -f ${results_file_path}
 
     if [ $? -ne 0 ]; then
         exit_code=1
