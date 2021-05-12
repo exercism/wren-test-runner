@@ -31,7 +31,7 @@ for test_dir in tests/*; do
         continue
     fi
     # echo
-    echo "TESTING: ${slug}"
+    # echo "TESTING: ${slug}"
 
     bin/run.sh "${slug}" "${input_path}" "${test_dir_path}"
 
@@ -44,7 +44,7 @@ for test_dir in tests/*; do
     #   -e "s~${test_dir_path}~/solution~g" \
     #   "${results_file_path}"
 
-    echo "${test_dir_name}: comparing results.json to expected_results.json"
+    # echo "${test_dir_name}: comparing results.json to expected_results.json"
     diff "${results_file_path}" "${expected_results_file_path}"
 
     if [ $? -ne 0 ]; then

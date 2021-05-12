@@ -1,3 +1,8 @@
 {
-    "slug": "two-fer"
+    "slug": "two-fer",
+    "tests": [
+        {},
+        {"x": 33},
+        {}
+    ]
 }

@@ -40,12 +40,22 @@ TEST="${input_dir}/${slug}.spec.wren"
 # echo $TEST
 # echo ln -sf ./vendor ${input_dir}/vendor
 ln -sf ../../../vendor ${input_dir}/vendor
-test_output=$(wren_cli $TEST 2>&1)
+rm $results_file
+test_output=$(wren_cli $TEST $results_file 2>&1)
+
+status=$?
+# echo "$test_output"
 
 # Write the results.json file based on the exit code of the command that was
 # just executed that tested the implementation file
-if [ $? -eq 0 ]; then
-    jq -n '{version: 2, status: "pass"}' > ${results_file}
+if [ $status -eq 0 ]; then
+    if [ -f $results_file ]; then
+        # need to pretify the JSOn output
+        cat ${results_file} | jq -M > .tmp
+        mv .tmp $results_file
+    else
+        jq -n '{version: 2, status: "pass"}' > ${results_file}
+    fi
 else
     # OPTIONAL: Sanitize the output
     # In some cases, the test output might be overly verbose, in which case stripping
