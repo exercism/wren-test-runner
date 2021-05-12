@@ -1,4 +1,18 @@
 {
-  "version": 1,
-  "status": "pass"
+  "version": 2,
+  "status": "pass",
+  "tests": [
+    {
+      "name": "no name given",
+      "status": "pass"
+    },
+    {
+      "name": "a name given",
+      "status": "pass"
+    },
+    {
+      "name": "another name given",
+      "status": "pass"
+    }
+  ]
 }

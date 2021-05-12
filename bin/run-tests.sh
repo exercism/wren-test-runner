@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Synopsis:
-# Test the test runner by running it against a predefined set of solutions 
+# Test the test runner by running it against a predefined set of solutions
 # with an expected output.
 
 # Output:
@@ -17,13 +17,26 @@ exit_code=0
 for test_dir in tests/*; do
     test_dir_name=$(basename "${test_dir}")
     test_dir_path=$(realpath "${test_dir}")
+    input_path="${test_dir_path}/input/"
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
 
-    bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
+    slug=$test_dir_name
+
+    if [ -f "${test_dir_path}/data.json" ]; then
+        # echo "found"
+        # echo ${test_dir_path}/data.json
+        slug=$(cat ${test_dir_path}/data.json | jq -r .slug)
+    else
+        continue
+    fi
+    # echo
+    echo "TESTING: ${slug}"
+
+    bin/run.sh "${slug}" "${input_path}" "${test_dir_path}"
 
     # OPTIONAL: Normalize the results file
-    # If the results.json file contains information that changes between 
+    # If the results.json file contains information that changes between
     # different test runs (e.g. timing information or paths), you should normalize
     # the results file to allow the diff comparison below to work as expected
     # sed -i -E \

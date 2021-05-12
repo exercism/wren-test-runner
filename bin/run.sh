@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Synopsis:
 # Run the test runner on a solution.
@@ -31,20 +31,26 @@ mkdir -p "${output_dir}"
 
 echo "${slug}: testing..."
 
+TEST="${input_dir}/${slug}.spec.wren"
+
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
 # TODO: Replace 'RUN_TESTS_COMMAND' with the command to run the tests
-test_output=$(RUN_TESTS_COMMAND 2>&1)
+# test_output=$(RUN_TESTS_COMMAND 2>&1)
+# echo $TEST
+# echo ln -sf ./vendor ${input_dir}/vendor
+ln -sf ../../../vendor ${input_dir}/vendor
+test_output=$(wren_cli $TEST 2>&1)
 
-# Write the results.json file based on the exit code of the command that was 
+# Write the results.json file based on the exit code of the command that was
 # just executed that tested the implementation file
 if [ $? -eq 0 ]; then
-    jq -n '{version: 1, status: "pass"}' > ${results_file}
+    jq -n '{version: 2, status: "pass"}' > ${results_file}
 else
     # OPTIONAL: Sanitize the output
     # In some cases, the test output might be overly verbose, in which case stripping
     # the unneeded information can be very helpful to the student
-    # sanitized_test_output=$(printf "${test_output}" | sed -n '/Test results:/,$p')
+    sanitized_test_output=$(printf "${test_output}" | sed "s%${input_dir}%%" )
 
     # OPTIONAL: Manually add colors to the output to help scanning the output for errors
     # If the test output does not contain colors to help identify failing (or passing)
@@ -53,7 +59,7 @@ else
     #      | GREP_COLOR='01;31' grep --color=always -E -e '^(ERROR:.*|.*failed)$|$' \
     #      | GREP_COLOR='01;32' grep --color=always -E -e '^.*passed$|$')
 
-    jq -n --arg output "${test_output}" '{version: 1, status: "fail", output: $output}' > ${results_file}
+    jq -n --arg output "${sanitized_test_output}" '{version: 2, status: "error", output: $output}' > ${results_file}
 fi
 
 echo "${slug}: done"
