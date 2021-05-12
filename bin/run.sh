@@ -35,28 +35,28 @@ TEST="${input_dir}/${slug}.spec.wren"
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
-# TODO: Replace 'RUN_TESTS_COMMAND' with the command to run the tests
-# test_output=$(RUN_TESTS_COMMAND 2>&1)
-# echo $TEST
-# echo ln -sf ./vendor ${input_dir}/vendor
 ln -sf ../../../vendor ${input_dir}/vendor
 rm $results_file
 test_output=$(wren_cli $TEST $results_file 2>&1)
 
 status=$?
+
+# cleanup
+rm ${input_dir}/vendor
 # echo "$test_output"
 
 # Write the results.json file based on the exit code of the command that was
 # just executed that tested the implementation file
 if [ $status -eq 0 ]; then
-    if [ -f $results_file ]; then
-        # need to pretify the JSOn output
-        cat ${results_file} | jq -M > .tmp
-        mv .tmp $results_file
-    else
-        jq -n '{version: 2, status: "pass"}' > ${results_file}
+    if [ ! -f $results_file ]; then
+        ERROR="Should have results file ($(basename $results_file)), but not found."
+        echo $ERROR
+        jq -n --arg output "${ERROR}" '{version: 2, status: "error", output: $output}' > ${results_file}
+        exit 2
     fi
-elif [ -f $results_file ]; then
+fi
+
+if [ -f $results_file ]; then
     cat ${results_file} | jq -M > .tmp
     mv .tmp $results_file
 
@@ -71,7 +71,7 @@ else
     # OPTIONAL: Sanitize the output
     # In some cases, the test output might be overly verbose, in which case stripping
     # the unneeded information can be very helpful to the student
-    sanitized_test_output=$(printf "${test_output}" | sed "s%${input_dir}%%" )
+    sanitized_test_output=$(echo "${test_output}" | sed "s%${input_dir}%.%" )
 
     # OPTIONAL: Manually add colors to the output to help scanning the output for errors
     # If the test output does not contain colors to help identify failing (or passing)

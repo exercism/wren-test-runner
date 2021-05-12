@@ -1,5 +1,5 @@
 {
   "version": 2,
   "status": "error",
-  "output": "[/two-fer line 3] Error at ',': Expected expression.\nCould not compile module '/two-fer'.\n[/two-fer.spec line 1] in (script)"
+  "output": "[./two-fer line 3] Error at ',': Expected expression.\nCould not compile module './two-fer'.\n[./two-fer.spec line 1] in (script)"
 }
