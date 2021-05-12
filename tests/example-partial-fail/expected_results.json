@@ -1,5 +1,20 @@
 {
-  "version": 1,
+  "version": 2,
   "status": "fail",
-  "output": "TODO: replace with correct output"
+  "tests": [
+    {
+      "name": "no name given",
+      "status": "pass"
+    },
+    {
+      "message": "Remove this statement and implement this function\n[./two-fer line 6] in twoFer(_)\n[./two-fer.spec line 11] in test(_,_) block argument\n ",
+      "name": "a name given",
+      "status": "fail"
+    },
+    {
+      "message": "Remove this statement and implement this function\n(stacktrace only available for first failing test due to current Wren limitations)",
+      "name": "another name given",
+      "status": "fail"
+    }
+  ]
 }

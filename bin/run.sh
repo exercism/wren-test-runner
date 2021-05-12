@@ -56,6 +56,17 @@ if [ $status -eq 0 ]; then
     else
         jq -n '{version: 2, status: "pass"}' > ${results_file}
     fi
+elif [ -f $results_file ]; then
+    cat ${results_file} | jq -M > .tmp
+    mv .tmp $results_file
+
+    index=$(cat $results_file | jq -M '[.tests[].status] | index("fail")')
+    if [ "$index" != "null" ]; then
+        trace=$(echo "$test_output" | sed -e '1,/STACKTRACE/ d' | sed "s%${input_dir}%.%")
+        cat $results_file | jq -M ".tests[$index].message |= \"$trace\" " > .tmp
+        mv .tmp $results_file
+    fi
+
 else
     # OPTIONAL: Sanitize the output
     # In some cases, the test output might be overly verbose, in which case stripping

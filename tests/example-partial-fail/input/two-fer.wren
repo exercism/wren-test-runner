@@ -3,6 +3,6 @@ class TwoFer {
     return "One for you, one for me."
   }
   static twoFer(name) {
-    return "One for %(name), one for me."
+    Fiber.abort("Remove this statement and implement this function")
   }
 }

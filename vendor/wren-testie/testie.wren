@@ -37,7 +37,7 @@ class JSONReporter {
         _tests.add({
             "name": "%(name)",
             "status": "fail",
-            "message": "%(error)"
+            "message": "%(error)\n(stacktrace only available for first failing test due to current Wren limitations)"
         })
     }
     success(name) {
