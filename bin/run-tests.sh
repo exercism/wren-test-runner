@@ -31,9 +31,9 @@ for test_dir in tests/*; do
         continue
     fi
     # echo
-    # echo "TESTING: ${slug}"
+    echo "TESTING: ${test_dir_name}"
 
-    bin/run.sh "${slug}" "${input_path}" "${test_dir_path}"
+    bin/run.sh "${slug}" "${input_path}" "${test_dir_path}" > /dev/null
 
     # OPTIONAL: Normalize the results file
     # If the results.json file contains information that changes between
