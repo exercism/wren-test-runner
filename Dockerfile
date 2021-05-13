@@ -1,7 +1,7 @@
 # This is a two stage build
 # first we need build-base and friends to build our custom wren_cli
 FROM alpine:3.13
-RUN apk add --no-cache jq coreutils git build-base bash
+RUN apk add --no-cache git build-base
 
 WORKDIR /tmp
 RUN git clone https://github.com/joshgoebel/wren-cli && \
