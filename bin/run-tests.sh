@@ -32,10 +32,6 @@ for test_dir in tests/*; do
     slug=$test_dir_name
 
     echo "TESTING: ${test_dir_name}"
-    if [ -f "${test_dir_path}/data.json" ]; then
-        slug=$(jq -r .slug ${test_dir_path}/data.json)
-    fi
-
     bin/run.sh "${slug}" "${TMP_INPUT_DIR}" "${test_dir_path}" > /dev/null
 
     # echo "${test_dir_name}: comparing results.json to expected_results.json"
