@@ -31,7 +31,9 @@ mkdir -p "${output_dir}"
 
 echo "${slug}: testing..."
 
-TEST="${input_dir}/${slug}.spec.wren"
+
+TESTFILE=$(jq -r .files.test[0] ${input_dir}/.meta/config.json)
+TEST="${input_dir}/${TESTFILE}"
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
