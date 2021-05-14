@@ -2,6 +2,21 @@
 
 The Docker image to automatically run tests on Wren solutions submitted to [Exercism].
 
+## Prerequisites
+
+### Mac
+
+You may need a few missing tools:
+
+```
+brew install jq
+# for sponge
+brew install moreutils
+```
+
+And of course you'll need to install `wren_cli`.
+
+
 ## Run the test runner
 
 To run the tests of an arbitrary exercise, do the following:

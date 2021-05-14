@@ -25,7 +25,7 @@ for test_dir in tests/*; do
 
     echo "TESTING: ${test_dir_name}"
     if [ -f "${test_dir_path}/data.json" ]; then
-        slug=$(cat ${test_dir_path}/data.json | jq -r .slug)
+        slug=$(jq -r .slug ${test_dir_path}/data.json)
     fi
 
     bin/run.sh "${slug}" "${input_path}" "${test_dir_path}" > /dev/null

@@ -11,7 +11,7 @@ RUN git clone https://github.com/joshgoebel/wren-cli && \
 
 # then we only need jq, bash, and wren_cli for running tests
 FROM alpine:3.13
-RUN apk add --no-cache jq bash
+RUN apk add --no-cache jq bash moreutils
 COPY --from=0 /tmp/wren-cli/bin/wren_cli /usr/bin
 RUN wren_cli --version
 
