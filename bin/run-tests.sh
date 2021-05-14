@@ -21,6 +21,14 @@ for test_dir in tests/*; do
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
 
+    # this is needed because we clobber the input directory (rewriting tests to
+    # disable skip) during the process of running tests so we don't want to
+    # actually destroy our source code (and risk that getting checked into Git
+    # accidentally)
+    TMP_INPUT_DIR=$(mktemp -d)
+    # I couldn't get cp -R to work consistently on both Mac OS X and Linux
+    rsync -r ${input_path} $TMP_INPUT_DIR
+
     slug=$test_dir_name
 
     echo "TESTING: ${test_dir_name}"
@@ -28,7 +36,7 @@ for test_dir in tests/*; do
         slug=$(jq -r .slug ${test_dir_path}/data.json)
     fi
 
-    bin/run.sh "${slug}" "${input_path}" "${test_dir_path}" > /dev/null
+    bin/run.sh "${slug}" "${TMP_INPUT_DIR}" "${test_dir_path}" > /dev/null
 
     # echo "${test_dir_name}: comparing results.json to expected_results.json"
     diff -urN "${expected_results_file_path}" "${results_file_path}"

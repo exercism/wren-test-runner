@@ -37,10 +37,10 @@ TEST="${input_dir}/${TESTFILE}"
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
-ln -sf ../../../vendor ${input_dir}/vendor
+ln -sf $(realpath ./vendor) ${input_dir}/vendor
 rm -f $results_file
 # rewrite any skipped tests to not be skipped
-sed -i '' -e 's/skip.test/do.test/' $TEST
+sed -i'' -e 's/skip.test/do.test/' $TEST
 test_output=$(wren_cli $TEST $results_file 2>&1)
 
 status=$?
