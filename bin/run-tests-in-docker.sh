@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
+set -e
 
 # Synopsis:
-# Test the test runner Docker image by running it against a predefined set of 
+# Test the test runner Docker image by running it against a predefined set of
 # solutions with an expected output.
 # The test runner Docker image is built automatically.
 
@@ -13,7 +14,7 @@
 # ./bin/run-tests-in-docker.sh
 
 # Build the Docker image
-docker build --rm -t exercism/test-runner .
+docker build --rm -t exercism/wren-test-runner .
 
 # Run the Docker image using the settings mimicking the production environment
 docker run \
@@ -24,4 +25,4 @@ docker run \
     --mount type=tmpfs,dst=/tmp \
     --workdir /opt/test-runner \
     --entrypoint /opt/test-runner/bin/run-tests.sh \
-    exercism/test-runner
+    exercism/wren-test-runner
