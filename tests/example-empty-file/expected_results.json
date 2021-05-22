@@ -1,5 +1,5 @@
 {
   "version": 2,
   "status": "error",
-  "output": "Could not find a variable named 'TwoFer' in module './two-fer'.\n[./two-fer.spec line 1] in (script)"
+  "message": "Could not find a variable named 'TwoFer' in module './two-fer'.\n[./two-fer.spec line 1] in (script)"
 }
