@@ -33,15 +33,18 @@ echo "${slug}: testing..."
 
 
 TESTFILE=$(jq -r .files.test[0] ${input_dir}/.meta/config.json)
-TEST="${input_dir}/${TESTFILE}"
+TEST="${TESTFILE}"
+ln -sf $(realpath ./vendor) ${input_dir}/vendor
+rm -f $results_file
+
+cd ${input_dir}
+
+# rewrite any skipped tests to not be skipped
+sed -i'' -e 's/skip.test/do.test/' $TEST
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
-ln -sf $(realpath ./vendor) ${input_dir}/vendor
-rm -f $results_file
-# rewrite any skipped tests to not be skipped
-sed -i'' -e 's/skip.test/do.test/' $TEST
-test_output=$(wren_cli $TEST $results_file 2>&1)
+test_output=$(wrenc $TEST $results_file 2>&1)
 
 status=$?
 
@@ -54,11 +57,11 @@ rm ${input_dir}/vendor
 if [ -f $results_file ]; then
     jq -r '.' $results_file | sponge $results_file
 
-    index=$(cat $results_file | jq -M '[.tests[].status] | index("fail")')
-    if [ "$index" != "null" ]; then
-        trace=$(echo "$test_output" | sed -e '1,/STACKTRACE/ d' | sed "s%${input_dir}%.%")
-        jq ".tests[$index].message |= \"$trace\"" $results_file | sponge $results_file
-    fi
+    # index=$(cat $results_file | jq -M '[.tests[].status] | index("fail")')
+    # if [ "$index" != "null" ]; then
+    #     trace=$(echo "$test_output" | sed -e '1,/STACKTRACE/ d' | sed "s%${input_dir}%.%")
+    #     jq ".tests[$index].message |= \"$trace\"" $results_file | sponge $results_file
+    # fi
 # otherwise something very bad happened so we return status:error
 else
     # OPTIONAL: Sanitize the output

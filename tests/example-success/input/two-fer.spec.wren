@@ -1,17 +1,17 @@
 import "./two-fer" for TwoFer
-import "./vendor/wren-testie/testie" for Testie, Assert
+import "./vendor/wren-testie/testie" for Testie, Expect
 
 Testie.test("TwoFer") { |do, skip|
 
   do.test("no name given") {
-    Assert.equal("One for you, one for me.", TwoFer.twoFer())
+    Expect.that(TwoFer.twoFer()).toEqual("One for you, one for me.")
   }
 
   skip.test("a name given") {
-    Assert.equal("One for Alice, one for me.", TwoFer.twoFer("Alice"))
+    Expect.that(TwoFer.twoFer("Alice")).toEqual("One for Alice, one for me.")
   }
 
   skip.test("another name given") {
-    Assert.equal("One for Bob, one for me.", TwoFer.twoFer("Bob"))
+    Expect.that(TwoFer.twoFer("Bob")).toEqual("One for Bob, one for me.")
   }
 }
