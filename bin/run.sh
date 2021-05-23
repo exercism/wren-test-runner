@@ -57,6 +57,10 @@ rm ${input_dir}/vendor
 if [ -f $results_file ]; then
     jq -r '.' $results_file | sponge $results_file
 
+    if [ ${PIPESTATUS[0]} -ne 0 ]; then
+        echo '{version: 2, status:"error", message: "Internal Exercism failure: Invalid JSON payload."}' > ${results_file}
+    fi
+
     # index=$(cat $results_file | jq -M '[.tests[].status] | index("fail")')
     # if [ "$index" != "null" ]; then
     #     trace=$(echo "$test_output" | sed -e '1,/STACKTRACE/ d' | sed "s%${input_dir}%.%")
