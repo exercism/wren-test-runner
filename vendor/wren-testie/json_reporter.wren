@@ -1,6 +1,6 @@
 import "os" for Process
 import "io" for File
-import "./json" for JSON
+import "./vendor/json" for JSON
 import "mirror" for Mirror
 
 class JSONReporter {
