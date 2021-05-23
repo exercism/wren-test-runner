@@ -1,5 +1,5 @@
 {
   "version": 2,
   "status": "error",
-  "message": "Could not find a variable named 'TwoFer' in module './two-fer'.\n[./two-fer.spec.wren line 1] in (script)\n[cli line 86] in runCode(_,_)\n[cli line 114] in runFile(_)\n[cli line 57] in start()\n[cli line 125] in (script)\n[<cli> line 1] in (script)"
+  "message": "Could not find a variable named 'TwoFer' in module './two-fer'.\nat (script) (./two-fer.spec.wren line 1)"
 }
