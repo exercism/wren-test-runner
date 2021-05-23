@@ -12,13 +12,31 @@ class JSON {
 //   }
 }
 
+var HEX_CHARS = [
+  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"
+]
+
 class JSONStringifier {
   construct new(object) {
     _object = object
   }
 
   toString { stringify(_object) }
-
+  lpad(s, count, with) {
+    while (s.count < count) {
+      s = "%(with)%(s)"
+    }
+    return s
+  }
+  toHex(byte) {
+    var hex = ""
+    while (byte > 0) {
+      var c = byte % 16
+      hex = HEX_CHARS[c] + hex
+      byte = byte >> 4
+    }
+    return hex
+  }
   stringify(obj) {
     if (obj is Num || obj is Bool || obj is Null) {
       return obj.toString
@@ -40,6 +58,10 @@ class JSONStringifier {
           substrings.add("\\r")
         } else if (char == "\t") {
           substrings.add("\\t")
+        } else if (char.bytes[0] < 0x1f) {
+          var byte = char.bytes[0]
+          var hex = lpad(toHex(byte),4, "0")
+          substrings.add("\\u" + hex)
         } else {
           substrings.add(char)
         }
