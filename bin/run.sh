@@ -37,6 +37,8 @@ TEST="${TESTFILE}"
 ln -sf $(realpath ./vendor) ${input_dir}/vendor
 rm -f $results_file
 
+# rsync -r wren_modules/ ${input_dir}/wren_modules/
+ln -sf $(realpath wren_modules) ${input_dir}/wren_modules
 cd ${input_dir}
 
 # rewrite any skipped tests to not be skipped
