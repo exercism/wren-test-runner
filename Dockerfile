@@ -12,10 +12,15 @@ RUN git clone https://github.com/joshgoebel/wren-console && \
 
 # then we only need jq, bash, and wren_cli for running tests
 FROM alpine:3.13
-RUN apk add --no-cache jq bash coreutils moreutils rsync sed
+RUN apk add --no-cache jq bash coreutils moreutils rsync sed git
 COPY --from=0 /tmp/wren-console/bin/wrenc /usr/bin
-RUN wrenc -v
+
+WORKDIR /opt/wren_modules
+RUN git clone https://github.com/joshgoebel/wren-package
 
 WORKDIR /opt/test-runner
+COPY package.wren .
+RUN wrenc package.wren install
 COPY . .
+RUN ./bin/post-install.sh
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]

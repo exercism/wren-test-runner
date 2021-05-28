@@ -1,4 +1,4 @@
-import "../wren-testie-orig/testie" for Testie as TestieOrig, Expect
+import "wren-testie/testie" for Testie as TestieOrig, Expect
 import "./json_reporter" for JSONReporter
 
 

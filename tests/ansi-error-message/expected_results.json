@@ -7,12 +7,12 @@
       "status": "pass"
     },
     {
-      "message": "\u001b[30m\u001b[1mexpect(\u001b[0m\u001b[31mreceived\u001b[30m\u001b[1m).toEqual(\u001b[0m\u001b[32mexpected\u001b[30m\u001b[1m) // deep equality\n\n\u001b[37m\u001b[1mExpected:\u001b[0m \u001b[32m`One for Alice, one for me.`\u001b[0m\n\u001b[37m\u001b[1mReceived:\u001b[0m \u001b[31m`One for [name], one for me.`\u001b[0m\nat test(_,_) block argument (./two-fer.spec.wren line 11)\nat toEqual(_) (./vendor/wren-testie-orig/src/expect line 96)\nat raise(_) (./vendor/wren-testie-orig/src/expect line 31)\nat throw(_) (./vendor/wren-testie-orig/src/expect line 7)\nat throw() (./vendor/wren-testie-orig/src/expect line 9)",
+      "message": "\u001b[30m\u001b[1mexpect(\u001b[0m\u001b[31mreceived\u001b[30m\u001b[1m).toEqual(\u001b[0m\u001b[32mexpected\u001b[30m\u001b[1m) // deep equality\n\n\u001b[37m\u001b[1mExpected:\u001b[0m \u001b[32m`One for Alice, one for me.`\u001b[0m\n\u001b[37m\u001b[1mReceived:\u001b[0m \u001b[31m`One for [name], one for me.`\u001b[0m\nat test(_,_) block argument (./two-fer.spec.wren line 11)\nat toEqual(_) (wren-testie/src/expect line 96)\nat raise(_) (wren-testie/src/expect line 31)\nat throw(_) (wren-testie/src/expect line 7)\nat throw() (wren-testie/src/expect line 9)",
       "name": "a name given",
       "status": "fail"
     },
     {
-      "message": "\u001b[30m\u001b[1mexpect(\u001b[0m\u001b[31mreceived\u001b[30m\u001b[1m).toEqual(\u001b[0m\u001b[32mexpected\u001b[30m\u001b[1m) // deep equality\n\n\u001b[37m\u001b[1mExpected:\u001b[0m \u001b[32m`One for Bob, one for me.`\u001b[0m\n\u001b[37m\u001b[1mReceived:\u001b[0m \u001b[31m`One for [name], one for me.`\u001b[0m\nat test(_,_) block argument (./two-fer.spec.wren line 15)\nat toEqual(_) (./vendor/wren-testie-orig/src/expect line 96)\nat raise(_) (./vendor/wren-testie-orig/src/expect line 31)\nat throw(_) (./vendor/wren-testie-orig/src/expect line 7)\nat throw() (./vendor/wren-testie-orig/src/expect line 9)",
+      "message": "\u001b[30m\u001b[1mexpect(\u001b[0m\u001b[31mreceived\u001b[30m\u001b[1m).toEqual(\u001b[0m\u001b[32mexpected\u001b[30m\u001b[1m) // deep equality\n\n\u001b[37m\u001b[1mExpected:\u001b[0m \u001b[32m`One for Bob, one for me.`\u001b[0m\n\u001b[37m\u001b[1mReceived:\u001b[0m \u001b[31m`One for [name], one for me.`\u001b[0m\nat test(_,_) block argument (./two-fer.spec.wren line 15)\nat toEqual(_) (wren-testie/src/expect line 96)\nat raise(_) (wren-testie/src/expect line 31)\nat throw(_) (wren-testie/src/expect line 7)\nat throw() (wren-testie/src/expect line 9)",
       "name": "another name given",
       "status": "fail"
     }
