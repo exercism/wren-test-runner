@@ -4,22 +4,20 @@ The Docker image to automatically run tests on Wren solutions submitted to [Exer
 
 ## Prerequisites
 
-You'll need to install [Wren Console](https://github.com/joshgoebel/wren-console).
+You'll need to install [Wren Console](https://github.com/joshgoebel/wren-console) and [Wren Package](https://github.com/joshgoebel/wren-package).
 
-And then the required testing libraries:
+Then install the Wren packages we depend on and inject our custom `testie` wrapper into `wren_modules`:
 
-```
-mkdir wren_modules
-cd wren_modules
-git clone https://github.com/joshgoebel/wren-testie
-cd ..
+```sh
+wrenc package.wren install
+./bin/post-install.sh
 ```
 
 ### Mac
 
 You may need a few missing tools:
 
-```
+```sh
 brew install jq
 # for sponge
 brew install moreutils

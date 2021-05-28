@@ -41,6 +41,9 @@ rm -f $results_file
 ln -sf $(realpath wren_modules) ${input_dir}/wren_modules
 cd ${input_dir}
 
+# rewrite to use the wrapper
+sed -i'' -e 's{"wren-testie/testie"{"wren-testie-wrapper/testie"{' $TEST
+
 # rewrite any skipped tests to not be skipped
 sed -i'' -e 's/skip.test/do.test/' $TEST
 

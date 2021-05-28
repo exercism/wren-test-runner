@@ -14,11 +14,13 @@ RUN git clone https://github.com/joshgoebel/wren-console && \
 FROM alpine:3.13
 RUN apk add --no-cache jq bash coreutils moreutils rsync sed git
 COPY --from=0 /tmp/wren-console/bin/wrenc /usr/bin
+
+WORKDIR /opt/wren_modules
+RUN git clone https://github.com/joshgoebel/wren-package
+
 WORKDIR /opt/test-runner
-
-RUN mkdir wren_modules && \
-    cd wren_modules && \
-    git clone -b 0.1.0 https://github.com/joshgoebel/wren-testie
-
+COPY package.wren .
+RUN wrenc package.wren install
 COPY . .
+RUN ./bin/post-install.sh
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]
