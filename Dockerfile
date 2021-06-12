@@ -4,7 +4,7 @@ FROM alpine:3.13
 RUN apk add --no-cache git build-base
 
 WORKDIR /tmp
-RUN git clone -b v0.2.90 --depth 2 https://github.com/joshgoebel/wren-console && \
+RUN git clone -b v0.2.91 --depth 2 https://github.com/joshgoebel/wren-console && \
     cd wren-console/deps && \
     git clone -b v0.1.0 --depth 2 https://github.com/joshgoebel/wren-essentials && \
     cd .. && \
@@ -14,9 +14,6 @@ RUN git clone -b v0.2.90 --depth 2 https://github.com/joshgoebel/wren-console &&
 FROM alpine:3.13
 RUN apk add --no-cache jq bash coreutils moreutils rsync sed git
 COPY --from=0 /tmp/wren-console/bin/wrenc /usr/bin
-
-WORKDIR /opt/wren_modules
-RUN git clone -b v0.1.0 --depth 2 https://github.com/joshgoebel/wren-package
 
 WORKDIR /opt/test-runner
 COPY package.wren .
