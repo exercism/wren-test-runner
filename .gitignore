@@ -1,3 +1,7 @@
 tests/*/results.json
 tests/**/vendor
 /wren_modules
+
+# vim
+.*.sw?
+.sw?

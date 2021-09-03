@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "status": "pass",
+  "tests": [
+    {
+      "name": "nested lists",
+      "status": "pass"
+    },
+    {
+      "name": "nested maps",
+      "status": "pass"
+    }
+  ]
+}
