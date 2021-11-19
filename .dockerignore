@@ -6,3 +6,4 @@ tests/
 wren_modules
 .appends
 .gitignore
+.gitattributes
