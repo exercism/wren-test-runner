@@ -8,3 +8,4 @@ wren_modules
 .gitignore
 .gitattributes
 .dockerignore
+Dockerfile
