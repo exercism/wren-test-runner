@@ -7,3 +7,4 @@ wren_modules
 .appends
 .gitignore
 .gitattributes
+.dockerignore
