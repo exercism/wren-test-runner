@@ -4,9 +4,9 @@ FROM alpine:3.13
 RUN apk add --no-cache git build-base
 
 WORKDIR /tmp
-RUN git clone -b v0.2.91 --depth 2 https://github.com/joshgoebel/wren-console && \
+RUN git clone -b v0.3.1 --depth 2 https://github.com/joshgoebel/wren-console && \
     cd wren-console/deps && \
-    git clone -b v0.1.0 --depth 2 https://github.com/joshgoebel/wren-essentials && \
+    git clone -b v0.2.1 --depth 2 https://github.com/joshgoebel/wren-essentials && \
     cd .. && \
     make -j4 -C projects/make/
 
