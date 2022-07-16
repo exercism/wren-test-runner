@@ -1,0 +1,45 @@
+name: wren-test-runner / ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # precheck:
+  #   runs-on: <image-name>
+
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use <setup tooling>
+  #       uses: <action to setup tooling>
+  #       with:
+  #         # Here, use the LTS/stable version of the track's tooling, e.g.:
+  #         # node-version: 12.x
+
+  #     - name: Install project dependencies
+  #       run: <install dependencies>
+
+  #     - name: Run exercism/wren ci pre-check (checks config, lint code) for all exercises
+  #       run: scripts/ci-check
+
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install wren-console
+        uses: joshgoebel/install_wren_console@v1.0
+      - name: Checkout wren-test-runner
+        uses: actions/checkout@v2
+        with:
+          path: test-runner
+      - name: Install deps and run CI
+        run: |
+          sudo apt-get install -y moreutils
+          cd test-runner
+          wrenc package.wren install
+          ./bin/post-install.sh
+          ./bin/run-tests.sh
