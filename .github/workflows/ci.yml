@@ -1,0 +1,66 @@
+name: wren-test-runner / ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # precheck:
+  #   runs-on: <image-name>
+
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use <setup tooling>
+  #       uses: <action to setup tooling>
+  #       with:
+  #         # Here, use the LTS/stable version of the track's tooling, e.g.:
+  #         # node-version: 12.x
+
+  #     - name: Install project dependencies
+  #       run: <install dependencies>
+
+  #     - name: Run exercism/wren ci pre-check (checks config, lint code) for all exercises
+  #       run: scripts/ci-check
+
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout wren-console
+        uses: actions/checkout@v2
+        with:
+          repository: joshgoebel/wren-console
+          path: wren-console
+          ref: v0.3.1
+      - name: Pin dependencies
+        shell: bash
+        run: |
+          cat wren-console/WREN_ESSENTIALS >> $GITHUB_ENV
+      - name: Checkout wren-essentials
+        uses: actions/checkout@v2
+        with:
+          repository: joshgoebel/wren-essentials
+          path: wren-console/deps/wren-essentials
+          ref: ${{env.WREN_ESSENTIALS}}
+      - name: Build wren-console
+        run: |
+          cd wren-console
+          make -j4 -C projects/make/
+          mkdir -p $GITHUB_WORKSPACE/usr/bin
+          cp bin/wrenc $GITHUB_WORKSPACE/usr/bin
+          echo "$GITHUB_WORKSPACE/usr/bin" >> $GITHUB_PATH
+      - name: Checkout wren-test-runner
+        uses: actions/checkout@v2
+        with:
+          path: test-runner
+      - name: Install deps and run CI
+        run: |
+          sudo apt-get install -y moreutils
+          cd test-runner
+          wrenc package.wren install
+          ./bin/post-install.sh
+          ./bin/run-tests.sh

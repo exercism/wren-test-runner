@@ -34,13 +34,17 @@ for test_dir in tests/*; do
     echo "TESTING: ${test_dir_name}"
     bin/run.sh "${slug}" "${TMP_INPUT_DIR}" "${test_dir_path}" > /dev/null
 
+    status=$?
+
     # echo "${test_dir_name}: comparing results.json to expected_results.json"
     diff -urN "${expected_results_file_path}" "${results_file_path}"
-    rm -f ${results_file_path}
-
     if [ $? -ne 0 ]; then
         exit_code=1
     fi
+    if [ $status -ne 0 ]; then
+        exit_code=1
+    fi
+    rm -f ${results_file_path}
 done
 
 exit ${exit_code}
