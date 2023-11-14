@@ -28,7 +28,7 @@ jobs:
   #       run: scripts/ci-check
 
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: install wren-console
         uses: joshgoebel/install_wren_console@v1.0
