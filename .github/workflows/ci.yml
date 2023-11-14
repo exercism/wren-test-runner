@@ -14,7 +14,7 @@ jobs:
   #   runs-on: <image-name>
 
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5
   #     - name: Use <setup tooling>
   #       uses: <action to setup tooling>
   #       with:
@@ -31,9 +31,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: install wren-console
-        uses: joshgoebel/install_wren_console@v1.0
+        uses: joshgoebel/install_wren_console@57ab2c4063656330e748b2cbd4beaeac30112a80
       - name: Checkout wren-test-runner
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5
         with:
           path: test-runner
       - name: Install deps and run CI
