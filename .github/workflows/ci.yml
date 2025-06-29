@@ -27,11 +27,12 @@ jobs:
   #     - name: Run exercism/wren ci pre-check (checks config, lint code) for all exercises
   #       run: scripts/ci-check
 
+
   ci:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: install wren-console
-        uses: joshgoebel/install_wren_console@57ab2c4063656330e748b2cbd4beaeac30112a80
+        uses: keiravillekode/install_wren_console@d7e530a23109651ef5d53d6fcc74612aa8ada6d5
       - name: Checkout wren-test-runner
         uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5
         with:
