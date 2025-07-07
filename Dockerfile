@@ -1,19 +1,10 @@
-# This is a two stage build
-# first we need build-base and friends to build our custom wren_cli
-FROM alpine:3.13
-RUN apk add --no-cache git build-base
+FROM alpine:latest
 
-WORKDIR /tmp
-RUN git clone -b v0.3.1 --depth 2 https://github.com/joshgoebel/wren-console && \
-    cd wren-console/deps && \
-    git clone -b v0.2.1 --depth 2 https://github.com/joshgoebel/wren-essentials && \
-    cd .. && \
-    make -j4 -C projects/make/
+RUN apk add --no-cache gcompat jq bash coreutils moreutils rsync sed git
 
-# then we only need jq, bash, and wren_cli for running tests
-FROM alpine:3.13
-RUN apk add --no-cache jq bash coreutils moreutils rsync sed git
-COPY --from=0 /tmp/wren-console/bin/wrenc /usr/bin
+WORKDIR /usr/local
+RUN wget -q https://github.com/joshgoebel/wren-console/releases/download/v0.3.1/wren-console-v0.3.1-linux.tar.gz -O - \
+  | tar zxf - 
 
 WORKDIR /opt/test-runner
 COPY package.wren .

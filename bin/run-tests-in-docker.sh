@@ -14,7 +14,7 @@ set -e
 # ./bin/run-tests-in-docker.sh
 
 # Build the Docker image
-docker build --rm -t exercism/wren-test-runner .
+[ "$SKIP_DOCKER_BUILD" = "true" ] || docker build --rm -t exercism/wren-test-runner .
 
 # Run the Docker image using the settings mimicking the production environment
 docker run \
