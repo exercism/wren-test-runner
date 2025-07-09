@@ -10,37 +10,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  # precheck:
-  #   runs-on: <image-name>
-
-  #   steps:
-  #     - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5
-  #     - name: Use <setup tooling>
-  #       uses: <action to setup tooling>
-  #       with:
-  #         # Here, use the LTS/stable version of the track's tooling, e.g.:
-  #         # node-version: 12.x
-
-  #     - name: Install project dependencies
-  #       run: <install dependencies>
-
-  #     - name: Run exercism/wren ci pre-check (checks config, lint code) for all exercises
-  #       run: scripts/ci-check
-
-
-  ci:
+  build:
+    name: Tests
     runs-on: ubuntu-24.04
     steps:
-      - name: install wren-console
-        uses: keiravillekode/install_wren_console@d7e530a23109651ef5d53d6fcc74612aa8ada6d5
-      - name: Checkout wren-test-runner
-        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5
-        with:
-          path: test-runner
-      - name: Install deps and run CI
-        run: |
-          sudo apt-get install -y moreutils
-          cd test-runner
-          wrenc package.wren install
-          ./bin/post-install.sh
-          ./bin/run-tests.sh
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Run Tests in Docker
+        run: bin/run-tests-in-docker.sh
