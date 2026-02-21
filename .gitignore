@@ -1,3 +1,4 @@
+tests/*/outcome.json
 tests/*/results.json
 tests/**/vendor
 /wren_modules
