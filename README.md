@@ -15,7 +15,7 @@ wrenc package.wren install
 
 ### Mac
 
-You may need jq:
+You may need jq installed:
 
 ```sh
 brew install jq
