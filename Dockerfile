@@ -1,10 +1,10 @@
 FROM alpine:3.22
 
-RUN apk add --no-cache gcompat jq bash coreutils moreutils rsync sed git
+RUN apk add --no-cache gcompat jq bash coreutils rsync sed git
 
 WORKDIR /usr/local
 RUN wget -q https://github.com/joshgoebel/wren-console/releases/download/v0.3.1/wren-console-v0.3.1-linux.tar.gz -O - \
-  | tar zxf - 
+  | tar zxf -
 
 WORKDIR /opt/test-runner
 COPY package.wren .

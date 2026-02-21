@@ -15,12 +15,10 @@ wrenc package.wren install
 
 ### Mac
 
-You may need a few missing tools:
+You may need jq:
 
 ```sh
 brew install jq
-# for sponge
-brew install moreutils
 ```
 
 
