@@ -1,4 +1,4 @@
-FROM alpine:3.23.5@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40
+FROM alpine:3.24.2@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
 ARG VERSION=v0.3.1
 
 RUN apk add --no-cache gcompat jq bash coreutils rsync sed git
